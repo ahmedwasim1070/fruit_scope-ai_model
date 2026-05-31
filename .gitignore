@@ -1,0 +1,38 @@
+# =========================
+# Node & Frontend (Vite)
+# =========================
+node_modules/
+dist/
+dist-ssr/
+*.local
+
+# =========================
+# Python & Backend (FastAPI)
+# =========================
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+.venv/
+venv/
+env/
+
+# =========================
+# ML Pipeline & Jupyter
+# =========================
+.ipynb_checkpoints/
+# Ignore raw data and heavy model weights to prevent GitHub blocks (100MB limit)
+ml_pipeline/data/*
+!ml_pipeline/data/.keep
+backend/model_artifacts/*.h5
+backend/model_artifacts/*.onnx
+backend/model_artifacts/*.pt
+
+# =========================
+# OS & Environment Variables
+# =========================
+.env
+.env.*
+!.env.example
+.DS_Store
+Thumbs.db
