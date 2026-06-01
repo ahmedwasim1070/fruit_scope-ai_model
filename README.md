@@ -10,7 +10,7 @@ Upload a fruit photo → get the top 3 predictions with confidence scores, insta
 
 | Service                | URL                                                                                                  |
 | ---------------------- | ---------------------------------------------------------------------------------------------------- |
-| **Frontend**           | [fruit-identifier.netlify.app](https://fruitidentifier1.netlify.app) ← _replace with yours_          |
+| **Frontend**           | [fruit-identifier.netlify.app](https://fruitidentifier1.netlify.app)                                 |
 | **Backend API**        | [ahmedwasim1070-fruit-identifier-api.hf.space](https://ahmedwasim1070-fruit-identifier-api.hf.space) |
 | **API Docs (Swagger)** | [/docs](https://ahmedwasim1070-fruit-identifier-api.hf.space/docs)                                   |
 
@@ -169,16 +169,6 @@ A native file explorer will open. Select any fruit image and the top prediction 
 
 ---
 
-## 🔑 Environment Variables
-
-### Frontend (`frontend/.env`)
-
-| Variable       | Default                 | Description      |
-| -------------- | ----------------------- | ---------------- |
-| `VITE_API_URL` | `http://localhost:8000` | Backend base URL |
-
----
-
 ## 🛠️ Tech Stack
 
 | Layer      | Technology                                               |
@@ -188,11 +178,3 @@ A native file explorer will open. Select any fruit image and the top prediction 
 | ML         | TensorFlow, Keras, Pillow, NumPy                         |
 | Training   | Google Colab (T4 GPU), Kaggle API                        |
 | Deployment | Netlify (frontend), Hugging Face Spaces Docker (backend) |
-
----
-
-## 👤 Author
-
-**Ahmed Wasim** — [@ahmedwasim1070](https://github.com/ahmedwasim1070)
-
-Bachelor's in Artificial Intelligence @ Riphah International University, Faisalabad
