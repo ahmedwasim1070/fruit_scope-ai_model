@@ -12,6 +12,6 @@ This repository is split into three distinct environments to maintain dependency
 
 ## Deployment Strategy
 
-- **Frontend**: Vercel
+- **Frontend**: Netlify
 - **Backend (Inference)**: Hugging Face Spaces (Docker)
 - **Model Training**: Google Colab (T4 GPU)
