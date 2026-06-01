@@ -21,10 +21,9 @@ env/
 # ML Pipeline & Jupyter
 # =========================
 .ipynb_checkpoints/
-# Ignore raw data and heavy model weights to prevent GitHub blocks (100MB limit)
 ml_pipeline/data/*
-!ml_pipeline/data/.keep
-backend/model_artifacts/*.h5
+!backend/model_artifacts/final_fruit_model.h5
+!backend/model_artifacts/class_names.json
 backend/model_artifacts/*.onnx
 backend/model_artifacts/*.pt
 

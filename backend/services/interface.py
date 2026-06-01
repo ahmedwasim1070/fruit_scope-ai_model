@@ -42,14 +42,14 @@ def process_and_predict(image_bytes: bytes):
     # Convert that bytes to numpy array - required format for CNN model
     img_array = np.array(img)
     img_array = np.expand_dims(img_array, axis=0) # Shape becomes (1, 100, 100, 3)
-    img_array = img_array / 255.0 # Rescale exactly as we did in training
+    img_array = img_array / 255.0 # Rescale exactly according to our model training
     
     # Execute our image to our model - after applying the required format required by model
     predictions = model.predict(img_array)
     predicted_class_idx = str(np.argmax(predictions[0]))
     confidence = float(np.max(predictions[0]))
     
-    # 4. Map the index to the real fruit name
+    # now match the model output that is in decimal to our - class names list (numerals to actual human readable output) 
     fruit_name = class_names.get(predicted_class_idx, "Unknown")
     
     return fruit_name, confidence
