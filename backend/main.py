@@ -10,8 +10,8 @@ app = FastAPI(
     version="1.0.0"
 )
 
-# Validatoin for server env
-if settings.ENVIROMENT=="production":
+# Validation for server env
+if getattr(settings, "ENVIRONMENT", "development") == "production":
     origins = [settings.ORIGIN]
 else:
     origins = ["*"]
