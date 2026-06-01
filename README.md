@@ -10,7 +10,7 @@ Upload a fruit photo → get the top 3 predictions with confidence scores, insta
 
 | Service                | URL                                                                                                  |
 | ---------------------- | ---------------------------------------------------------------------------------------------------- |
-| **Frontend**           | [fruit-identifier.netlify.app](https://fruit-identifier.netlify.app) ← _replace with yours_          |
+| **Frontend**           | [fruit-identifier.netlify.app](https://fruitidentifier1.netlify.app) ← _replace with yours_          |
 | **Backend API**        | [ahmedwasim1070-fruit-identifier-api.hf.space](https://ahmedwasim1070-fruit-identifier-api.hf.space) |
 | **API Docs (Swagger)** | [/docs](https://ahmedwasim1070-fruit-identifier-api.hf.space/docs)                                   |
 
