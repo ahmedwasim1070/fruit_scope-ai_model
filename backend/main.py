@@ -12,7 +12,7 @@ app = FastAPI(
 
 # Validatoin for server env
 if settings.ENVIROMENT=="production":
-    origins = ["https://fruitidentifier.netlify.app"]
+    origins = [settings.ORIGIN]
 else:
     origins = ["*"]
 
