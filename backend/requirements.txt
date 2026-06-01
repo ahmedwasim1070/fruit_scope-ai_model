@@ -17,6 +17,6 @@ typing_extensions==4.15.0
 uvicorn==0.48.0
 
 # Machine Learning & Image Processing
-tensorflow-cpu==2.15.0.post1
+tensorflow-cpu==2.16.1
 numpy==1.26.4
 Pillow==10.2.0

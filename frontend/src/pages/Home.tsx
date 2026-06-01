@@ -1,9 +1,11 @@
 import { useState, useRef, useCallback } from "react";
 
-type Result = {
-  label: string;
+type Prediction = {
+  fruit_name: string;
   confidence: number;
-} | null;
+};
+
+type Result = Prediction[] | null;
 
 export default function Home() {
   const [preview, setPreview] = useState<string | null>(null);
@@ -54,14 +56,15 @@ export default function Home() {
 
       // Replace with your actual Hugging Face Space URL
       const res = await fetch(
-        `${import.meta.env.VITE_API_URL ?? "http://localhost:8000"}/predict`,
+        `${import.meta.env.VITE_API_URL ?? "http://localhost:8000"}/api/predict`,
         { method: "POST", body: form },
       );
 
       if (!res.ok) throw new Error(`Server error: ${res.status}`);
 
       const data = await res.json();
-      setResult({ label: data.label, confidence: data.confidence });
+      if (!data.success) throw new Error("Prediction failed.");
+      setResult(data.prediction);
     } catch (err: unknown) {
       setError(err instanceof Error ? err.message : "Something went wrong.");
     } finally {
@@ -160,23 +163,48 @@ export default function Home() {
 
         {/* Result */}
         {result && (
-          <div className="rounded-lg bg-green-950/40 border border-green-800 px-5 py-4 flex flex-col gap-1">
-            <span className="text-xs text-green-600 font-mono uppercase tracking-widest">
-              Prediction
-            </span>
-            <span className="text-2xl font-bold text-green-300">
-              {result.label}
-            </span>
-            <div className="flex items-center gap-3 mt-1">
-              <div className="flex-1 h-2 rounded-full bg-zinc-800 overflow-hidden">
-                <div
-                  className="h-full bg-green-500 rounded-full transition-all duration-700"
-                  style={{ width: `${(result.confidence * 100).toFixed(1)}%` }}
-                />
-              </div>
-              <span className="text-sm text-zinc-400 font-mono w-14 text-right">
-                {(result.confidence * 100).toFixed(1)}%
+          <div className="rounded-lg border border-zinc-800 bg-zinc-900/50 overflow-hidden">
+            <div className="px-4 py-3 border-b border-zinc-800 flex items-center justify-between">
+              <span className="text-xs text-zinc-500 font-mono uppercase tracking-widest">
+                Top Predictions
               </span>
+              <span className="text-xs text-zinc-600">
+                {result[0].fruit_name}
+              </span>
+            </div>
+            <div className="divide-y divide-zinc-800/60">
+              {result.map((p, i) => (
+                <div
+                  key={p.fruit_name}
+                  className="px-4 py-3 flex items-center gap-4"
+                >
+                  <span
+                    className={`text-xs font-mono w-4 shrink-0 ${
+                      i === 0 ? "text-green-400" : "text-zinc-600"
+                    }`}
+                  >
+                    #{i + 1}
+                  </span>
+                  <span
+                    className={`text-sm font-medium flex-1 ${
+                      i === 0 ? "text-zinc-100" : "text-zinc-400"
+                    }`}
+                  >
+                    {p.fruit_name}
+                  </span>
+                  <div className="w-28 h-1.5 rounded-full bg-zinc-800 overflow-hidden">
+                    <div
+                      className={`h-full rounded-full transition-all duration-700 ${
+                        i === 0 ? "bg-green-500" : "bg-zinc-600"
+                      }`}
+                      style={{ width: `${(p.confidence * 100).toFixed(1)}%` }}
+                    />
+                  </div>
+                  <span className="text-xs text-zinc-500 font-mono w-12 text-right">
+                    {(p.confidence * 100).toFixed(1)}%
+                  </span>
+                </div>
+              ))}
             </div>
           </div>
         )}

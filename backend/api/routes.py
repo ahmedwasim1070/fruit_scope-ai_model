@@ -15,13 +15,12 @@ async def predict_fruit(file: UploadFile = File(...)):
         contents = await file.read()
         
         # Pass our image to the serviecs layer - services/interface.py
-        fruit_name, confidence = process_and_predict(contents)
+        predictions_list = process_and_predict(contents)
         
         # return success payload if successfull
         return {
             "success": True,
-            "prediction": fruit_name,
-            "confidence": round(confidence * 100, 2),
+            "prediction": predictions_list,
             "filename": file.filename
         }
         

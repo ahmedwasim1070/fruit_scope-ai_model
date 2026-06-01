@@ -12,8 +12,7 @@ app = FastAPI(
 
 # Validatoin for server env
 if settings.ENVIROMENT=="production":
-    # origins = ["https://fruitidentifier.vercel.app"]
-    origins = ["*"]
+    origins = ["https://fruitidentifier.netlify.app"]
 else:
     origins = ["*"]
 
