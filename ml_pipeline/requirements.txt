@@ -1,7 +1,15 @@
-tensorflow==2.15.0
-keras==2.15.0
-numpy
-pandas
-matplotlib
-scikit-learn
-kaggle
+# Core Deep Learning Frameworks (Keras 3 / Colab alignment)
+tensorflow==2.16.1
+keras==2.16.1
+
+# Data Processing, Math & Analytics
+numpy==1.26.4
+pandas==2.2.2
+scikit-learn==1.4.2
+
+# Visualization & Image Utilities
+matplotlib==3.8.4
+Pillow==10.2.0
+
+# Data Ingestion & Datasets
+kaggle==1.6.14

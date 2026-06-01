@@ -60,14 +60,18 @@ def run_local_test():
     # 5. Predict
     print("🧠 Running inference...")
     predictions = model.predict(img_array, verbose=0)
-    predicted_class_idx = str(np.argmax(predictions[0]))
-    confidence = np.max(predictions[0]) * 100
-
-    # 6. Output clear results to CLI
-    fruit_name = class_names.get(predicted_class_idx, "Unknown")
+    
+    # Get the indices of the top 3 highest probabilities
+    top_3_indices = np.argsort(predictions[0])[-3:][::-1]
+    
+    # Prints
     print("\n" + "="*40)
-    print(f"🍎 PREDICTION : {fruit_name}")
-    print(f"📊 CONFIDENCE : {confidence:.2f}%")
+    print("🎯 TOP 3 PREDICTIONS:")
+    print("-" * 40)
+    for idx in top_3_indices:
+        fruit_name = class_names.get(str(idx), "Unknown")
+        confidence = predictions[0][idx] * 100
+        print(f"[{fruit_name}] : {confidence:.2f}%")
     print("="*40 + "\n")
 
 if __name__ == "__main__":
