@@ -4,7 +4,7 @@ from pydantic_settings import BaseSettings, SettingsConfigDict
 class Settings(BaseSettings):
     APP_NAME:str
     ORIGIN:str="*"
-    ENVIROMENT:str="production"
+    ENVIRONMENT:str="production"
 
     # Scan for .env file
     model_config = SettingsConfigDict(
