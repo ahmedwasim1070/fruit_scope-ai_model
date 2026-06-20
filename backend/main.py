@@ -6,7 +6,7 @@ from api.routes import router as api_router
 # Initialize the application
 app = FastAPI(
     title=settings.APP_NAME,
-    description="CNN Backend for identifying fruits",
+    description="Fruit Scope Backed - API Endpoint",
     version="1.0.0"
 )
 

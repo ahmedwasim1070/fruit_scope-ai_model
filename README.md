@@ -1,20 +1,18 @@
-# 🍎 Fruit Identifier
+# 🍎 Fruit Scope
 
-**Domain:** `fruitidentifier1.netlify.app`
+**Domain:** `fruitscope.netlify.app`
 
 A full-stack machine learning project built as a university-level CNN application. It classifies **131 fruit categories** from images using a Convolutional Neural Network trained on the **Fruits 360 dataset**, delivering real-time predictions with confidence scores.
 
-Users can upload an image and receive the top 3 predicted fruit classes instantly through a web interface powered by a FastAPI inference backend.
+Users can upload an image and receive the top 3 predicted fruit classes instantly through a web interface powered by a FastAPI inference service hosted on Hugging Face.
 
 ---
 
 ## 🌐 Live Deployment
 
-| Service                | Status    | Access                                                               |
-| ---------------------- | --------- | -------------------------------------------------------------------- |
-| **Frontend**           | 🟢 Online | [Web App](https://fruitidentifier1.netlify.app)                      |
-| **Backend API**        | 🟢 Online | [API Endpoint](https://ahmedwasim1070-fruit-identifier-api.hf.space) |
-| **API Docs (Swagger)** | 🟢 Online | [/docs](https://ahmedwasim1070-fruit-identifier-api.hf.space/docs)   |
+| Service        | Status    | Access                                    |
+| -------------- | --------- | ----------------------------------------- |
+| **Production** | 🟢 Online | [Web App](https://fruitscope.netlify.app) |
 
 ---
 
@@ -22,13 +20,13 @@ Users can upload an image and receive the top 3 predicted fruit classes instantl
 
 ### Core Architecture
 
-* **Frontend Framework:** React + Vite (TypeScript)
-* **Styling:** Tailwind CSS
-* **Backend Framework:** FastAPI (Python)
-* **ML Framework:** TensorFlow / Keras
-* **Image Processing:** Pillow
-* **Deployment:** Netlify (Frontend), Hugging Face Spaces (Backend Docker)
-* **Package Manager:** pnpm
+- **Frontend Framework:** React + Vite (TypeScript)
+- **Styling:** Tailwind CSS
+- **Backend Framework:** FastAPI (Python)
+- **ML Framework:** TensorFlow / Keras
+- **Image Processing:** Pillow
+- **Deployment:** Netlify (Frontend), Hugging Face Spaces (Backend Docker)
+- **Package Manager:** pnpm
 
 ---
 
@@ -38,10 +36,10 @@ This project was developed as part of a university-level deep learning implement
 
 It demonstrates:
 
-* End-to-end ML pipeline design (training → export → inference)
-* Separation of concerns between frontend, backend, and ML pipeline
-* Production-style model serving using FastAPI
-* Real-time image classification using a pretrained CNN
+- End-to-end ML pipeline design (training → export → inference)
+- Separation of concerns between frontend, backend, and ML pipeline
+- Production-style model serving using FastAPI
+- Real-time image classification using a pretrained CNN
 
 ---
 
@@ -52,7 +50,7 @@ A fully modular monorepo separating UI, inference, and training workflows:
 ```
 fruit-identifier/
 ├── frontend/          # React + Vite UI layer
-├── backend/           # FastAPI inference service
+├── backend/           # FastAPI inference service (Hugging Face Space)
 │   └── model_artifacts/
 │       ├── final_fruit_model.h5
 │       └── class_names.json
@@ -65,31 +63,33 @@ fruit-identifier/
 
 ### Frontend `/frontend`
 
-* React + Vite + TypeScript
-* Tailwind CSS UI
-* Drag-and-drop image upload
-* Sends `multipart/form-data` to backend
-* Displays top 3 predictions with confidence visualization
+- React + Vite + TypeScript
+- Tailwind CSS UI
+- Drag-and-drop image upload
+- Sends `multipart/form-data` to backend
+- Displays top 3 predictions with confidence visualization
 
 ---
 
-### Backend `/backend`
+### Backend (Hugging Face Space)
 
-* FastAPI inference server
-* TensorFlow CPU-based model loading
-* Pillow-based preprocessing pipeline
-* Stateless REST API design
-* Returns structured JSON predictions
+- FastAPI inference server hosted on Hugging Face Spaces
+- TensorFlow CPU-based model loading
+- Pillow-based preprocessing pipeline
+- Stateless REST API design
+- Returns structured JSON predictions
 
 ---
 
 ### ML Pipeline `/ml_pipeline`
 
-* TensorFlow + Keras training environment
-* Dataset: Fruits 360 (Kaggle)
-* Google Colab (T4 GPU) used for training
-* Model export to `.h5` format
-* Includes inference testing script for validation
+- TensorFlow + Keras training environment
+- Dataset: Fruits 360 (Moltean)
+  https://www.kaggle.com/datasets/moltean/fruits
+  A structured dataset of fruit images used for CNN-based multi-class classification.
+- Google Colab (T4 GPU) used for training
+- Model export to `.h5` format
+- Includes inference testing script for validation
 
 ---
 
@@ -128,8 +128,6 @@ file: image
 { "status": "ok" }
 ```
 
-Interactive API documentation available at `/docs` (Swagger UI).
-
 ---
 
 ## 🧪 Model Details
@@ -151,46 +149,13 @@ The trained model is directly loaded for inference without retraining, enabling 
 
 ### Prerequisites
 
-* Python 3.10+
-* Node.js 18+
-* pnpm
+- Python 3.10+
+- Node.js 18+
+- pnpm
 
 ---
 
-### Backend Setup
-
-```bash
-cd backend
-
-python -m venv .venv
-source .venv/bin/activate   # Windows: .venv\Scripts\activate
-
-pip install -r requirements.txt
-
-uvicorn main:app --reload --port 8000
-```
-
-Runs at: `http://localhost:8000`
-
----
-
-### Frontend Setup
-
-```bash
-cd frontend
-
-pnpm install
-
-echo "VITE_API_URL=http://localhost:8000" > .env
-
-pnpm dev
-```
-
-Runs at: `http://localhost:5173`
-
----
-
-## 🧪 Standalone Inference Testing
+### Run Standalone Inference (Local ML Testing)
 
 Run model inference without the web stack:
 
@@ -207,10 +172,17 @@ A file picker opens for image selection and prints predictions directly in the t
 | Layer      | Stack                                 |
 | ---------- | ------------------------------------- |
 | Frontend   | React, Vite, TypeScript, Tailwind CSS |
-| Backend    | FastAPI, Python, Uvicorn              |
+| Backend    | FastAPI, Python, Uvicorn (HF Hosted)  |
 | ML         | TensorFlow, Keras, NumPy, Pillow      |
 | Training   | Google Colab (T4 GPU), Kaggle API     |
 | Deployment | Netlify, Hugging Face Spaces (Docker) |
+
+---
+
+## 🔗 Backend Repository
+
+Hugging Face Space (FastAPI Backend):
+👉 [Huging Face Repo](https://huggingface.co/spaces/ahmedwasim1070/fruit_scope-api/tree/main)
 
 ---
 

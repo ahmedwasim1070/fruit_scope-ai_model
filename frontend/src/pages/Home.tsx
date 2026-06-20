@@ -86,15 +86,14 @@ export default function Home() {
       <section className="text-center flex flex-col items-center gap-5">
         <span className="text-5xl select-none">🍎</span>
         <h1 className="text-4xl sm:text-5xl font-bold tracking-tight text-zinc-100">
-          Fruit Identifier
+          Fruit Scope
         </h1>
         <p className="text-zinc-400 text-lg max-w-xl leading-relaxed">
-          Upload any fruit image and our CNN will classify it from{" "}
-          <span className="text-green-400 font-semibold">131 fruit types</span>{" "}
-          with a confidence score — powered by TensorFlow + FastAPI.
+          Upload an image to identify fruit categories using a convolutional
+          neural network (CNN) model.
         </p>
         <div className="flex flex-wrap justify-center gap-2 mt-1">
-          {["CNN Model", "131 Classes", "FastAPI", "TensorFlow"].map((tag) => (
+          {["Toddler CNN Model", "Supports 131 Fruits"].map((tag) => (
             <span
               key={tag}
               className="px-2.5 py-1 rounded bg-zinc-800 text-zinc-400 text-xs font-mono border border-zinc-700"
@@ -220,40 +219,19 @@ export default function Home() {
       </section>
 
       {/* How it works */}
-      <section className="border-t border-zinc-800 pt-14 flex flex-col gap-8">
-        <h2 className="text-2xl font-bold text-zinc-100 text-center">
-          How it works
-        </h2>
-        <div className="grid sm:grid-cols-3 gap-5">
-          {[
-            {
-              icon: "📤",
-              title: "Upload",
-              desc: "Select or drag a fruit photo from your device.",
-            },
-            {
-              icon: "🧠",
-              title: "Inference",
-              desc: "FastAPI preprocesses the image and runs it through the CNN.",
-            },
-            {
-              icon: "✅",
-              title: "Result",
-              desc: "Get the fruit label and confidence score instantly.",
-            },
-          ].map((step) => (
-            <div
-              key={step.title}
-              className="rounded-xl border border-zinc-800 bg-zinc-900/50 p-6 flex flex-col gap-3"
-            >
-              <span className="text-3xl">{step.icon}</span>
-              <h3 className="font-semibold text-zinc-100">{step.title}</h3>
-              <p className="text-zinc-500 text-sm leading-relaxed">
-                {step.desc}
-              </p>
-            </div>
-          ))}
-        </div>
+      {/* Note */}
+      <section className="border-t border-zinc-800 pt-14 flex flex-col gap-8 text-center">
+        <h2 className="text-2xl font-bold text-zinc-100">Note</h2>
+
+        <p className="text-zinc-500 text-sm max-w-2xl mx-auto leading-relaxed">
+          This is a lightweight CNN model trained on a limited dataset. It may
+          produce incorrect predictions for images outside the
+          <span className="text-zinc-300 font-medium">
+            {" "}
+            Fruits 360 (Kaggle: Moltean dataset)
+          </span>
+          distribution.
+        </p>
       </section>
     </div>
   );
