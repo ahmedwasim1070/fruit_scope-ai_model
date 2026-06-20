@@ -1,70 +1,109 @@
 # 🍎 Fruit Identifier
 
-A full-stack machine learning application that classifies **131 different fruit types** from user-uploaded images using a Convolutional Neural Network (CNN) trained on the [Fruits 360](https://www.kaggle.com/datasets/moltean/fruits) dataset.
+**Domain:** `fruitidentifier1.netlify.app`
 
-Upload a fruit photo → get the top 3 predictions with confidence scores, instantly.
+A full-stack machine learning project built as a university-level CNN application. It classifies **131 fruit categories** from images using a Convolutional Neural Network trained on the **Fruits 360 dataset**, delivering real-time predictions with confidence scores.
 
----
-
-## 🔗 Live Deployment
-
-| Service                | URL                                                                                                  |
-| ---------------------- | ---------------------------------------------------------------------------------------------------- |
-| **Frontend**           | [fruit-identifier.netlify.app](https://fruitidentifier1.netlify.app)                                 |
-| **Backend API**        | [ahmedwasim1070-fruit-identifier-api.hf.space](https://ahmedwasim1070-fruit-identifier-api.hf.space) |
-| **API Docs (Swagger)** | [/docs](https://ahmedwasim1070-fruit-identifier-api.hf.space/docs)                                   |
+Users can upload an image and receive the top 3 predicted fruit classes instantly through a web interface powered by a FastAPI inference backend.
 
 ---
 
-## 🏗️ Architecture
+## 🌐 Live Deployment
 
-This is a monorepo with three strictly isolated environments — separating web concerns from heavy ML computation.
+| Service                | Status    | Access                                                               |
+| ---------------------- | --------- | -------------------------------------------------------------------- |
+| **Frontend**           | 🟢 Online | [Web App](https://fruitidentifier1.netlify.app)                      |
+| **Backend API**        | 🟢 Online | [API Endpoint](https://ahmedwasim1070-fruit-identifier-api.hf.space) |
+| **API Docs (Swagger)** | 🟢 Online | [/docs](https://ahmedwasim1070-fruit-identifier-api.hf.space/docs)   |
+
+---
+
+## 🛠 Tech Stack
+
+### Core Architecture
+
+* **Frontend Framework:** React + Vite (TypeScript)
+* **Styling:** Tailwind CSS
+* **Backend Framework:** FastAPI (Python)
+* **ML Framework:** TensorFlow / Keras
+* **Image Processing:** Pillow
+* **Deployment:** Netlify (Frontend), Hugging Face Spaces (Backend Docker)
+* **Package Manager:** pnpm
+
+---
+
+## 🧠 Learning Project Overview (CNN System Design)
+
+This project was developed as part of a university-level deep learning implementation focused on real-world CNN deployment workflows.
+
+It demonstrates:
+
+* End-to-end ML pipeline design (training → export → inference)
+* Separation of concerns between frontend, backend, and ML pipeline
+* Production-style model serving using FastAPI
+* Real-time image classification using a pretrained CNN
+
+---
+
+## 🏗️ System Architecture
+
+A fully modular monorepo separating UI, inference, and training workflows:
 
 ```
 fruit-identifier/
-├── frontend/          # React + Vite (TypeScript)
-├── backend/           # FastAPI inference server
+├── frontend/          # React + Vite UI layer
+├── backend/           # FastAPI inference service
 │   └── model_artifacts/
 │       ├── final_fruit_model.h5
 │       └── class_names.json
-└── ml_pipeline/       # Training notebooks & scripts
+└── ml_pipeline/       # Training & experimentation layer
     └── scripts/
         └── test_inference.py
 ```
 
+---
+
 ### Frontend `/frontend`
 
-- **Stack:** React, Vite, TypeScript, Tailwind CSS
-- **Package Manager:** `pnpm`
-- **Hosting:** Netlify
-- Drag-and-drop image upload, sends `multipart/form-data` to the backend, and displays the top 3 predictions with confidence bars.
+* React + Vite + TypeScript
+* Tailwind CSS UI
+* Drag-and-drop image upload
+* Sends `multipart/form-data` to backend
+* Displays top 3 predictions with confidence visualization
+
+---
 
 ### Backend `/backend`
 
-- **Stack:** FastAPI, Uvicorn, TensorFlow (CPU-only), Pillow
-- **Hosting:** Hugging Face Spaces (Docker)
-- Stateless inference API. Receives an image, preprocesses it with Pillow, runs it through the CNN, and returns the top 3 predictions as JSON.
-- Model artifacts live permanently in `backend/model_artifacts/` — the server points directly here.
+* FastAPI inference server
+* TensorFlow CPU-based model loading
+* Pillow-based preprocessing pipeline
+* Stateless REST API design
+* Returns structured JSON predictions
+
+---
 
 ### ML Pipeline `/ml_pipeline`
 
-- **Stack:** TensorFlow (GPU), Jupyter, Pandas, Kaggle API
-- **Compute:** Google Colab (T4 GPU)
-- Notebooks for downloading the Fruits 360 dataset via the Kaggle API, preprocessing, training the CNN, and exporting the `.h5` model file.
+* TensorFlow + Keras training environment
+* Dataset: Fruits 360 (Kaggle)
+* Google Colab (T4 GPU) used for training
+* Model export to `.h5` format
+* Includes inference testing script for validation
 
 ---
 
 ## 📡 API Reference
 
-**`POST /predict`**
+### `POST /predict`
 
-Accepts a fruit image and returns the top 3 predictions.
+Upload an image and receive top predictions.
 
 **Request**
 
 ```
 Content-Type: multipart/form-data
-Field: file  (image/png, image/jpeg, image/webp)
+file: image
 ```
 
 **Response**
@@ -81,100 +120,98 @@ Field: file  (image/png, image/jpeg, image/webp)
 }
 ```
 
-**`GET /health`**
+---
+
+### `GET /health`
 
 ```json
 { "status": "ok" }
 ```
 
-Interactive docs available at [`/docs`](https://ahmedwasim1070-fruit-identifier-api.hf.space/docs) (Swagger UI).
+Interactive API documentation available at `/docs` (Swagger UI).
 
 ---
 
-## ⚠️ Model
+## 🧪 Model Details
 
-| Property     | Detail                             |
-| ------------ | ---------------------------------- |
-| Architecture | Convolutional Neural Network (CNN) |
-| Dataset      | Fruits 360 (Kaggle)                |
-| Classes      | 131 fruit types                    |
-| File         | `final_fruit_model.h5`             |
-| Size         | ~77 MB                             |
-| Location     | `backend/model_artifacts/`         |
+| Property    | Value                        |
+| ----------- | ---------------------------- |
+| Model Type  | Convolutional Neural Network |
+| Dataset     | Fruits 360 (Kaggle)          |
+| Classes     | 131 fruit categories         |
+| File Format | `.h5` (Keras model)          |
+| Size        | ~77 MB                       |
+| Location    | `backend/model_artifacts/`   |
 
-> The model is pre-trained and committed to this repo for reproducible inference — no retraining required to run locally.
+The trained model is directly loaded for inference without retraining, enabling reproducible execution across environments.
 
 ---
 
-## 🚀 Running Locally
+## 🚀 Local Setup Guide
 
 ### Prerequisites
 
-- Python 3.10+
-- Node.js 18+ & `pnpm`
+* Python 3.10+
+* Node.js 18+
+* pnpm
 
-### 1. Backend
+---
+
+### Backend Setup
 
 ```bash
 cd backend
 
-# Create and activate a virtual environment
 python -m venv .venv
-source .venv/bin/activate          # Windows: .venv\Scripts\activate
+source .venv/bin/activate   # Windows: .venv\Scripts\activate
 
-# Install dependencies
 pip install -r requirements.txt
 
-# Start the server
 uvicorn main:app --reload --port 8000
 ```
 
-API will be live at `http://localhost:8000`.
+Runs at: `http://localhost:8000`
 
-### 2. Frontend
+---
+
+### Frontend Setup
 
 ```bash
 cd frontend
 
-# Install dependencies
 pnpm install
 
-# Create environment file
 echo "VITE_API_URL=http://localhost:8000" > .env
 
-# Start dev server
 pnpm dev
 ```
 
-Frontend will be live at `http://localhost:5173`.
+Runs at: `http://localhost:5173`
 
 ---
 
-## 🧪 Standalone Inference Test
+## 🧪 Standalone Inference Testing
 
-Test the model directly from the CLI before running the full web stack.
+Run model inference without the web stack:
 
 ```bash
-# From the project root — activate the ML venv
-python -m venv .venv
-source ml_pipeline/.venv/bin/activate
-
-# Run the GUI file picker script
 python ml_pipeline/scripts/test_inference.py
 ```
 
-A native file explorer will open. Select any fruit image and the top prediction will print to your terminal.
-
-> **Requires** `final_fruit_model.h5` and `class_names.json` in `backend/model_artifacts/`, and a system GUI toolkit for the file picker dialog.
+A file picker opens for image selection and prints predictions directly in the terminal.
 
 ---
 
-## 🛠️ Tech Stack
+## 🛠 Tech Stack Summary
 
-| Layer      | Technology                                               |
-| ---------- | -------------------------------------------------------- |
-| Frontend   | React, Vite, TypeScript, Tailwind CSS                    |
-| Backend    | FastAPI, Uvicorn, Python                                 |
-| ML         | TensorFlow, Keras, Pillow, NumPy                         |
-| Training   | Google Colab (T4 GPU), Kaggle API                        |
-| Deployment | Netlify (frontend), Hugging Face Spaces Docker (backend) |
+| Layer      | Stack                                 |
+| ---------- | ------------------------------------- |
+| Frontend   | React, Vite, TypeScript, Tailwind CSS |
+| Backend    | FastAPI, Python, Uvicorn              |
+| ML         | TensorFlow, Keras, NumPy, Pillow      |
+| Training   | Google Colab (T4 GPU), Kaggle API     |
+| Deployment | Netlify, Hugging Face Spaces (Docker) |
+
+---
+
+© 2026 Academic Project — CNN-Based Image Classification System
