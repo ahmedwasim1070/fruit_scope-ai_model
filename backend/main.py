@@ -28,10 +28,11 @@ app.add_middleware(
 # Register our routes under the /api prefix
 app.include_router(api_router, prefix="/api")
 
-# On server run
+# Additional Endpoints - required by Host
 @app.get("/")
-def health_check():
-    return {
-        "status": "healthy", 
-        "message": "Fruit Detector API is running!"
-    }
+def root():
+    return {"status": "ok"}
+
+@app.get("/health")
+def health():
+    return {"status": "ok"}

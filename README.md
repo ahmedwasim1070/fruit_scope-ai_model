@@ -84,8 +84,8 @@ fruit-identifier/
 ### ML Pipeline `/ml_pipeline`
 
 - TensorFlow + Keras training environment
-- Dataset: Fruits 360 (Moltean)
-  https://www.kaggle.com/datasets/moltean/fruits
+- Dataset: Fruits 360
+  [Moltean/Fruits](https://www.kaggle.com/datasets/moltean/fruits)
   A structured dataset of fruit images used for CNN-based multi-class classification.
 - Google Colab (T4 GPU) used for training
 - Model export to `.h5` format
