@@ -123,7 +123,7 @@ export default function Home() {
             <p className="text-zinc-300 font-medium">
               Drop an image or click to browse
             </p>
-            <p className="text-zinc-600 text-sm">PNG, JPG, WEBP supported</p>
+            <p className="text-zinc-600 text-sm">Only PNG Supported</p>
             <input
               ref={inputRef}
               type="file"
